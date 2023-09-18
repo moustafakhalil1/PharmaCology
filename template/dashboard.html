@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!--Graphs-->
+  <div class="container mx-auto w-75 p-4 m-5">
+    <div class="row ">
+
+      <div class="col-md-3 " >
+        <div class="card bg-warning border-success hover-h" id="myDIV">
+          <div class="card-header border-0">
+            <div class="d-flex justify-content-between">
+              <h3 class="card-title">prescriptions's Missing Characters </h3>                    
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-center ">
+              <p class="d-flex flex-column text-danger">
+                <span class="text-bold text-center">accuracy: {{perceptions}}</span>
+                
+               
+              </p>  
+            </div>
+            <!-- /.d-flex -->
+
+            <div class="position-relative mb-4">
+              <canvas id="visitors-chart" height="5"></canvas>
+            </div>  
+          </div>
+        </div>
+     
+        <!-- /.card -->
+      </div>
+
+     
+    </div>
+  </div>
+
+<!--End Graphs-->
+{% endblock content %}

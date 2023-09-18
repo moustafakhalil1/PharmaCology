@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+            <section class="vh-100" style="background-color: light;">
+                <div class="container ">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-9 col-xl-9">
+                      <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body ">
+                          <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                              
+                              <div class="card-body ">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <br>
+                                    <!-- Button trigger modal -->
+                                    <h3 type="button" class="btn btn-primary " data-toggle="" data-target="#exampleModal">
+                                      How to   read    Prescription   ?
+                                    </h3>
+                                    
+                                    <br>
+                                    <br>
+                                    
+                                    <h5>1)Select 'Prescription Reading' </h5>
+                                    <br>
+                                    <h5>2)Select 'Crop Prescription' </h5>
+                                    <br>
+                                    <h5>3)Select 'Read Prescription' </h5>
+                                    <br>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Prescription </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <!-- AUTO IMAGE ORIENTATION -->
+                                            <div class="file-loading">
+                                                <input id="input-file-1" name="imageFile" multiple type="file" accept="image/*">
+                                            </div>
+                                            <!-- AUTO IMAGE ORIENTATION--->
+                                            <div class="checkbox">
+                                                <label>
+                                                <input id="toggleOrient" name="tog" type="checkbox" checked>
+                                                Toggle Auto Orientation
+                                                </label>
+                                            </div>
+                                            <div id="togStatus" class="hint-block">
+                                            </div>
+                                            <script>
+                                            $("#input-file-1").fileinput({
+                                                uploadUrl: "/file-upload-batch/2",
+                                                autoOrientImage: true
+                                            });
+                                            $("#toggleOrient").on('change', function() {
+                                                var val = $(this).prop('checked');
+                                                $("#input-file-1").fileinput('refresh', {
+                                                    uploadUrl: "/file-upload-batch/2",
+                                                    autoOrientImage: val
+                                                });
+                                                $('#togStatus').html('Fileinput is reset and <samp>autoOrientImage</samp> is set to <em>' + (val ? 'true' : 'false') + '</em>. Retry by selecting images again.');
+                                            });
+                                            </script>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <input type="submit" class="btn btn-primary" value="Confirm">
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div>
+                                    <br>
+                                    
+                                    <br>
+                                      <h4>{{predictions}}</h4>
+                                     <br>
+                                  
+                                   
+                                  
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                
+                              <img src="https://medicalschoolhq.net/wp-content/uploads/2012/03/script_errors_Example3.jpg"
+                                class="img-fluid" alt="Sample image">
+                
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                 
+                  
+                        <div class="col-md-3 " >
+                          <div class="card bg-warning border-success hover-h" id="myDIV">
+                            <div class="card-header border-0">
+                              <div class="d-flex justify-content-between">
+                                <h3 class="card-title">prescriptions's Missing Characters </h3>                    
+                              </div>
+                            </div>
+                            <div class="card-body">
+                              <div class="d-flex justify-content-center ">
+                                <p class="d-flex flex-column text-danger">
+                                  <span class="text-bold text-center">accuracy: {{perceptions}}</span>
+                                  
+                                 
+                                </p>  
+                              </div>
+                              <!-- /.d-flex -->
+                  
+                              <div class="position-relative mb-4">
+                                <canvas id="visitors-chart" height="5"></canvas>
+                              </div>  
+                            </div>
+                          </div>
+                       
+                          <!-- /.card -->
+                        </div>
+                  
+                       
+                    
+                  
+                  </div>
+                </div>
+            </section>   
+
+{% endblock content %}

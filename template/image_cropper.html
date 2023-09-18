@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div>
+
+    <h3 class="btn btn-info" >Please adjust the crop box so that it ONLY contains the names of the medicines</h3>
+    <br>
+    <h2>Image Cropper</h2>
+    <br>
+    <input type="file" id="imageInput" accept="image/*" />
+    <br/>
+    <br/>
+    <div>
+      <img id="image" src="" alt="Crop Image">
+    </div>
+    <br/>
+    <button onclick="cropImage()">Crop</button>
+    <button onclick="resetImage()">Reset</button>
+    <br/>
+    <br/>
+    <h2>Cropped Image</h2>
+    <img id="croppedImage" src="" alt="Cropped Image">
+    <br/>
+    <br/>
+    <button onclick="downloadCroppedImage()">Download</button>
+  </div>
+
+  <script>
+    var cropper;
+
+    // Load the selected image file
+    function loadImage(event) {
+      var input = event.target;
+      var reader = new FileReader();
+
+      reader.onload = function() {
+        var dataURL = reader.result;
+        var image = document.getElementById('image');
+        image.src = dataURL;
+
+        cropper = new Cropper(image);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+
+    // Crop the image and display the cropped version
+    function cropImage() {
+      var croppedCanvas = cropper.getCroppedCanvas();
+      var croppedImage = document.getElementById('croppedImage');
+      croppedImage.src = croppedCanvas.toDataURL();
+    }
+
+    // Reset the image and the cropping area
+    function resetImage() {
+      cropper.reset();
+      document.getElementById('croppedImage').src = '';
+    }
+
+    // Download the cropped image
+    function downloadCroppedImage() {
+      var croppedCanvas = cropper.getCroppedCanvas();
+      croppedCanvas.toBlob(function(blob) {
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'cropped_image.png';
+        link.click();
+      }, 'image/png');
+    }
+
+    document.getElementById('imageInput').addEventListener('change', loadImage);
+  </script>
+
+{% endblock content %}
