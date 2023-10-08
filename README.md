@@ -1,5 +1,5 @@
 # PharmaCology with Python , Django FrameWork (deep learning) 
-1-Read doctors' prescriptions and print them on the screen using a #machine and #deep learning wih #Django Framework.
+1-Read doctors' prescriptions and print them on the screen using a #machine and #deep learning with #Django Framework For the Backend API.
 
 2-There are instructions on each page of the application to guide the user.
 #Tools i Used :
